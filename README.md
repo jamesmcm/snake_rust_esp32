@@ -14,6 +14,10 @@ Photo:
 
 ![Photo of breadboard](./breadboardphoto_small.jpg)
 
+Video:
+
+https://github.com/user-attachments/assets/54323a01-4e3c-4797-bbef-9ba5340bed02
+
 
 Embassy is used to run concurrent tasks (checking for input at a faster
 rate than the game update rate). 
