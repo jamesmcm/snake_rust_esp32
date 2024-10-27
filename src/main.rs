@@ -43,6 +43,7 @@ const MID_JOYSTICK: u16 = 1600;
 const HIGH_JOYSTICK: u16 = 3500;
 
 static PLAYER_DIRECTION: AtomicDirection = AtomicDirection::new(Direction::Right);
+static PROCESSED_DIRECTION: AtomicDirection = AtomicDirection::new(Direction::Right);
 static CONFIRM_BOOL: AtomicBool = AtomicBool::new(false);
 
 static G_BUTTON: Mutex<RefCell<Option<Input<AnyPin>>>> = Mutex::new(RefCell::new(None));
@@ -412,15 +413,18 @@ impl Game {
                     }
                 }
                 self.player.move_player(self.size);
+                PROCESSED_DIRECTION.store(self.player.direction.load(Ordering::Relaxed), Ordering::Relaxed);
 
                 self.draw_player(display, self.style_on);
                 if self.player.head_in_tail() {
                     self.state = GameState::GameOver;
+                    CONFIRM_BOOL.store(false, Ordering::Relaxed);
                     self.draw_death_screen(display);
                     return;
                 }
                 if self.player.length >= 16 {
                     self.state = GameState::Won;
+                    CONFIRM_BOOL.store(false, Ordering::Relaxed);
                     self.draw_win_screen(display);
                     return;
                 }
@@ -466,7 +470,8 @@ async fn check_joypad(urx: GpioPin<25>, ury: GpioPin<15>, adc_peripheral: ADC2) 
         // );
 
         if let Some(direction) = Direction::from_urx_ury(urx_pin_value, ury_pin_value) {
-            let current_direction = PLAYER_DIRECTION.load(Ordering::Relaxed);
+            // We use processed direction to avoid being able to double back if we change direction twice before the next frame
+            let current_direction = PROCESSED_DIRECTION.load(Ordering::Relaxed);
             if direction != current_direction && direction != current_direction.opposite() {
                 PLAYER_DIRECTION.store(direction, Ordering::Relaxed);
             }
