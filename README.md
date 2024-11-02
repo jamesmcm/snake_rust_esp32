@@ -6,7 +6,7 @@ written in Rust.
 This was written as a basic starter project.
 
 Hardware:
-- [ESP32-WROOM-32 board](https://www.az-delivery.de/en/products/esp32-developmentboard) - note this has an ESP32 Qtensa chip not a C series RISC-V one.
+- [ESP32-WROOM-32 board](https://www.az-delivery.de/en/products/esp32-developmentboard) - note this has an ESP32 Xtensa chip not a C series RISC-V one.
 - [KY-023 Joystick module](https://www.az-delivery.de/en/products/joystick-modul) - note this has a click input too.
 - [0.96 inch SSD1306 128x64 I2C OLED display](https://www.az-delivery.de/en/products/0-96zolldisplay)
 
