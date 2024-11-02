@@ -18,6 +18,9 @@ Video:
 
 https://github.com/user-attachments/assets/54323a01-4e3c-4797-bbef-9ba5340bed02
 
+Wokwi project (note does not build there due to Rust dependencies): https://wokwi.com/projects/413450202628576257
+
+![Breadboard diagram](./diagram.png)
 
 Embassy is used to run concurrent tasks (checking for input at a faster
 rate than the game update rate). 
