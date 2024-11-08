@@ -23,7 +23,7 @@ Wokwi project (note does not build there due to Rust dependencies): https://wokw
 ![Breadboard diagram](./diagram.png)
 
 Embassy is used to run concurrent tasks (checking for input at a faster
-rate than the game update rate). 
+rate than the game update rate).
 
 The joystick URX and URY axes inputs are handled with a built-in
 Analogue-Digital Converter (be careful about the choice of GPIO pins as
@@ -40,6 +40,11 @@ Then run:
 $ source ~/export-esp.sh
 $ cargo run --release
 ```
+
+## Simulation
+
+Install [Wokwi for VS Code](https://docs.wokwi.com/vscode/getting-started/).
+Open diagram.json and click Play button.
 
 ## Notes
 
